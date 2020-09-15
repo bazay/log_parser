@@ -7,12 +7,26 @@ module LogParser
       @ip_address = ip_address
     end
 
+    def ==(other)
+      page == other.page && ip_address == other.ip_address
+    end
+
     class << self
       def sort_by_page_views(log_items)
+        build_sorted_hash(log_items)
+      end
+
+      def sort_by_unique_views(log_items)
+        build_sorted_hash(log_items, unique: true)
+      end
+
+      private
+
+      def build_sorted_hash(log_items, unique: false)
         unsorted_hash = {}
         log_items.each do |log_item|
           if unsorted_hash[log_item.page]
-            unsorted_hash[log_item.page] << log_item
+            unsorted_hash[log_item.page] << log_item unless unique && unsorted_hash[log_item.page].include?(log_item)
           else
             unsorted_hash[log_item.page] = [log_item]
           end
