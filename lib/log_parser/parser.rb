@@ -1,3 +1,5 @@
+require 'log_parser/log_item'
+
 module LogParser
   class Parser
     attr_reader :log_path, :log_items
@@ -16,7 +18,7 @@ module LogParser
     private
 
     def with_valid_file
-      missing_file_error! unless File.exists?(log_path)
+      missing_file_error! unless File.exist?(log_path)
 
       File.open(log_path) do |file|
         file.each_line do |line|
@@ -32,7 +34,7 @@ module LogParser
     def parse_log_line(line)
       page, ip_address = line.split
 
-      { page: page, ip_address: ip_address }
+      LogItem.new(page: page, ip_address: ip_address)
     end
   end
 end
