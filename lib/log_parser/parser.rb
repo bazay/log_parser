@@ -13,6 +13,8 @@ module LogParser
       with_valid_file do |line|
         @log_items << parse_log_line(line)
       end
+
+      self
     end
 
     private

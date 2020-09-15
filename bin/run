@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require 'log_parser'
+
+class LogPrinter
+  attr_reader :parser
+
+  def initialize(path)
+    @parser = LogParser::Parser.new(path).parse
+  end
+
+  def print
+    puts 'Webpages with most page views:'
+    with_log_items('page_views') do |page, items, count|
+      puts "#{count}. #{page} #{items.count} visits"
+    end
+
+    puts 'Webpages with most unique page views:'
+    with_log_items('unique_views') do |page, items, count|
+      puts "#{count}. #{page} #{items.count} unique views"
+    end
+  end
+
+  private
+
+  def with_log_items(sort)
+    LogParser::LogItem.send("sort_by_#{sort}", @parser.log_items).each_with_index do |(page, items), index|
+      yield(page, items, index + 1)
+    end
+    puts ''
+  end
+end
+
+if ARGV[0]
+  LogPrinter.new(ARGV[0]).print
+else
+  puts 'Please provide path to log file i.e. bin/run PATH_TO_FILE'
+end

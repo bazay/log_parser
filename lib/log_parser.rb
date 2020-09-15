@@ -1,4 +1,6 @@
-require "log_parser/version"
+require 'log_parser/version'
+require 'log_parser/parser'
+require 'log_parser/log_item'
 
 module LogParser
   def self.root
