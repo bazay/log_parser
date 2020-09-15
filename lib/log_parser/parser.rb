@@ -22,10 +22,11 @@ module LogParser
     def with_valid_file
       missing_file_error! unless File.exist?(log_path)
 
-      File.open(log_path) do |file|
-        file.each_line do |line|
-          yield(line)
-        end
+      # NOTE: This may be less performant however uses significantly less memory.
+      # The following article provides a good explanation.
+      # https://tjay.dev/howto-working-efficiently-with-large-files-in-ruby/
+      File.foreach(log_path).each_entry do |line|
+        yield(line)
       end
     end
 
