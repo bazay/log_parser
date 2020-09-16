@@ -1,7 +1,7 @@
 require 'log_parser'
 require 'rspec/its'
 
-Dir[File.join(LogParser.root, 'spec', 'support', '**', '*.rb')].each { |f| require f }
+Dir[File.join(LogParser.root, 'spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -51,7 +51,7 @@ RSpec.configure do |config|
     # Use the documentation formatter for detailed output,
     # unless a formatter has already been configured
     # (e.g. via a command-line flag).
-    config.default_formatter = "doc"
+    config.default_formatter = 'doc'
   end
 
   # Print the 10 slowest examples and example groups at the
@@ -70,5 +70,4 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
-
 end

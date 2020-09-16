@@ -1,17 +1,16 @@
-
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "log_parser/version"
+require 'log_parser/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "log_parser"
+  spec.name          = 'log_parser'
   spec.version       = LogParser::VERSION
-  spec.authors       = ["Baron Bloomer"]
-  spec.email         = ["baronbloomer@gmail.com"]
+  spec.authors       = ['Baron Bloomer']
+  spec.email         = ['baronbloomer@gmail.com']
 
-  spec.summary       = %q{A simple log file parsing library.}
-  spec.description   = %q{A solution designed for a coding task outlined in ./TASK.md.}
-  spec.homepage      = "https://github.com/bazay/log_parser"
+  spec.summary       = 'A simple log file parsing library.'
+  spec.description   = 'A solution designed for a coding task outlined in ./TASK.md.'
+  spec.homepage      = 'https://github.com/bazay/log_parser'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -28,16 +27,16 @@ Gem::Specification.new do |spec|
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+  spec.files         = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.9"
-  spec.add_development_dependency "rspec-its", "~> 1.3"
-  # spec.add_development_dependency "rubocop" # Uncomment to enable
+  spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.9'
+  spec.add_development_dependency 'rspec-its', '~> 1.3'
+  spec.add_development_dependency 'rubocop'
 end

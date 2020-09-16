@@ -19,19 +19,17 @@ module LogParser
 
     private
 
-    def with_valid_file
+    def with_valid_file(&block)
       missing_file_error! unless File.exist?(log_path)
 
       # NOTE: This may be less performant however uses significantly less memory.
       # The following article provides a good explanation.
       # https://tjay.dev/howto-working-efficiently-with-large-files-in-ruby/
-      File.foreach(log_path).each_entry do |line|
-        yield(line)
-      end
+      File.foreach(log_path).each_entry(&block)
     end
 
     def missing_file_error!
-      raise FileNotFoundError.new(log_path)
+      raise FileNotFoundError, log_path
     end
 
     def parse_log_line(line)

@@ -4,7 +4,7 @@ require 'log_parser/log_item'
 
 module LogParser
   def self.root
-    File.expand_path '../..', __FILE__
+    File.expand_path '..', __dir__
   end
 
   class FileNotFoundError < StandardError
